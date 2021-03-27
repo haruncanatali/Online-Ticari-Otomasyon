@@ -1,0 +1,39 @@
+create trigger Urun_Satis_Durumu on SatisHareket after insert 
+	as 
+		declare @urunId int,@urunAdet int
+		begin
+			select @urunId=UrunId from inserted
+			select @urunAdet=Adet from inserted
+
+			update Urun set Stok = Stok-@urunAdet where Id = @urunId
+		end
+
+create trigger Urun_Iade_Durumu on SatisHareket after delete 
+	as 
+		declare @urunId int,@urunAdet int
+		begin
+			select @urunId=UrunId from deleted
+			select @urunAdet=Adet from deleted
+
+			update Urun set Stok = Stok+@urunAdet where Id = @urunId
+		end
+
+create trigger Urun_SatisGuncelleme_Durumu on SatisHareket after update 
+	as 
+		declare @urunId int,@urunAdet1 int,@urunAdet2 int,@fark int
+		begin
+			select @urunId=UrunId from inserted
+			select @urunAdet1=Adet from deleted
+			select @urunAdet2=Adet from inserted
+
+			if(@urunAdet2>@urunAdet1)
+				begin
+					set @fark = @urunAdet2-@urunAdet1
+					update Urun set Stok = Stok - @fark where Id = @urunId
+				end
+			else
+				begin
+					set @fark = @urunAdet1-@urunAdet2
+					update Urun set Stok = Stok + @fark where Id = @urunId
+				end
+		end
