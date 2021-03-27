@@ -11,6 +11,7 @@ Bu projede çok katmanlı mimari kullanılarak Asp.Net MVC5 ile online ticari ot
  6. Ninject
  7. PagedList.MVC
  8. Authorization(Yetkilendirme)
+ 9. Triggers
 
 ### Projeden Görüntüler
 ![1](https://user-images.githubusercontent.com/77530565/112716579-407e8880-8ef8-11eb-88a4-029ebb15d421.png)
