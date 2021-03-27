@@ -1,0 +1,50 @@
+﻿@model OnlineOtomasyon.Entities.Concrete.Fatura
+@{
+    ViewBag.Title = "Guncelle";
+    string durum = "";
+    if (ViewBag.errorMessages==null)
+    {
+        durum = "invisible";
+    }
+}
+
+<div class="row">
+    <form class="mt-3" method="post" action="/Fatura/Guncelle">
+        <div class="row">
+            <div class="col-md-6">
+                <label>Müşteri</label>
+                @Html.DropDownListFor(c => c.MusteriId, (List<SelectListItem>)ViewBag.musteriDegerleri, new { @class = "form-control" })
+                <label class="mt-3">Personel</label>
+                @Html.DropDownListFor(c => c.PersonelId, (List<SelectListItem>)ViewBag.personelDegerleri, new { @class = "form-control" })
+                <label class="mt-3">Vergi Dairesi</label>
+                @Html.TextBoxFor(c => c.VergiDairesi, new { @class = "form-control" })
+            </div>
+            <div class="col-md-6">
+                <label>Seri</label>
+                @Html.TextBoxFor(c => c.SeriNo, new { @class = "form-control" })
+                <label class="mt-3">Sıra Numarası</label>
+                @Html.TextBoxFor(c => c.SiraNo, new { @class = "form-control" })
+                <div class="mt-4">
+                    <button class="btn btn-primary" type="submit">Güncelle</button>
+                    <a class="btn btn-warning" href="/Fatura/Index">Vazgeç</a>
+
+                    @Html.HiddenFor(c => c.Id)
+                    @Html.HiddenFor(c => c.Tarih)
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<div class="row mt-5">
+    <div class="alert alert-danger @durum">
+        <p class="text-danger">
+            @ViewBag.errorMessages
+        </p>
+    </div>
+</div>
+
+
+
+

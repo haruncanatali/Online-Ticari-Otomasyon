@@ -1,0 +1,49 @@
+﻿@model List<OnlineOtomasyon.Entities.Concrete.FaturaKalem>
+@{
+    ViewBag.Title = "Detay";
+}
+
+@if (Model.Count < 1)
+{
+    <div class="alert alert-danger mt-2">
+        <p class="text-danger">
+            Sistemde bu faturaya ait detay bulunamadı!
+        </p>
+        <a href="/Fatura/DetayEkle/@ViewBag.IdDegeri" class="btn btn-primary">Ekle</a>
+    </div>
+}
+else
+{
+    <table class="table table-striped mt-2">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Fatura ID</th>
+                <th>Ürün</th>
+                <th>Birim Fiyatı</th>
+                <th>Miktar</th>
+                <th>Tutar</th>
+                <th>Veritabanı İşlemleri</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id.ToString()</td>
+                    <td>@item.FaturaId.ToString()</td>
+                    <td>@item.Urun.Ad</td>
+                    <td>@item.BirimFiyat.ToString()</td>
+                    <td>@item.Miktar.ToString()</td>
+                    <td>@item.Tutar.ToString()</td>
+                    <td>
+                        <a class="btn btn-warning w-20" href="/Fatura/DetayGuncelle/@item.Id">Güncelle</a>
+                        <a class="btn btn-danger w-20" href="/Fatura/DetaySil/@item.Id">Sil</a>
+                        <a class="btn btn-primary w-20" href="/Fatura/DetayEkle/@item.FaturaId">Ekle</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+

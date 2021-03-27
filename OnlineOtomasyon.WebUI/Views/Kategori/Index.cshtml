@@ -1,0 +1,41 @@
+﻿@model List<OnlineOtomasyon.Entities.Concrete.Kategori>
+@{
+    ViewBag.Title = "Index";
+}
+
+@if(Model.Count < 1)
+{
+    <div class="alert alert-danger mt-3">
+        <h3 class="">Henüz Kategori Eklenmemiş!</h3>
+    </div>
+}
+else
+{
+    <table class="table table-bordered table-striped mt-4">
+        
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Kategori Adı</th>
+                <th>Veritabanı İşlemi</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id.ToString()</td>
+                    <td>@item.KategoriAdi</td>
+                    <td class="text-center">
+                        <a class="btn btn-warning btn-sm w-25" style="margin-left:10px;" href="/Kategori/Guncelle/@item.Id">Güncelle</a>
+                        <a class="btn btn-danger btn-sm w-25" style="margin-left:10px;" href="/Kategori/Sil/@item.Id">Sil</a>
+                        <a class="btn btn-primary btn-sm w-25" style="margin-left:10px;" href="/Kategori/Ekle">Ekle</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+

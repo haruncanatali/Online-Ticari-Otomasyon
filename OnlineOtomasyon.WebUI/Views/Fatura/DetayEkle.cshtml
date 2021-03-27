@@ -1,0 +1,41 @@
+﻿@model OnlineOtomasyon.Entities.Concrete.FaturaKalem
+@{
+    ViewBag.Title = "DetayEkle";
+    string durum = "";
+    if(ViewBag.errorMessages == null)
+    {
+        durum = "invisible";
+    }
+}
+
+<div class="row">
+    <form class="mt-2" action="/Fatura/DetayEkle" method="post">
+        <div class="row">
+            <div class="col-md-6">
+                <label>Ürün</label>
+                @Html.DropDownListFor(c => c.UrunId, (List<SelectListItem>)ViewBag.urunDegerleri, new { @class = "form-control" })
+                <label class="mt-2">Birim Fiyatı</label>
+                @Html.TextBoxFor(c => c.BirimFiyat, new { @class = "form-control" })
+            </div>
+            <div class="col-md-6">
+                <label>Miktar</label>
+                @Html.TextBoxFor(c => c.Miktar, new { @class = "form-control" })
+                <label class="mt-2">Tutar</label>
+                @Html.TextBoxFor(c => c.Tutar, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center mt-3">
+                <button type="submit" class="btn btn-primary w-25">Ekle</button>
+                <a href="/Fatura/Detay" class="btn btn-warning w-25" style="margin-left:20px;">Vazgeç</a>
+                @Html.HiddenFor(c=>c.FaturaId)
+        </div>
+    </form>
+</div>
+<div class="row mt-2 @durum">
+    <div class="alert alert-danger">
+        <p class="text-danger">
+            @ViewBag.errorMessages
+        </p>
+    </div>
+</div>
+

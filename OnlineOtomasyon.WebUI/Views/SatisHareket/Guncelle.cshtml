@@ -1,0 +1,56 @@
+﻿@model OnlineOtomasyon.Entities.Concrete.SatisHareket
+@{
+    ViewBag.Title = "Guncelle";
+    string durum = "";
+    if (ViewBag.errorMessages == null)
+    {
+        durum = "invisible";
+    }
+
+}
+
+<form class="mt-3" method="post" action="/SatisHareket/Guncelle">
+    <div class="row">
+        <div class="col-md-6">
+
+            <label>Müşteri Adı ve Soyadı</label>
+            @Html.DropDownListFor(c => c.MusteriId, (List<SelectListItem>)ViewBag.musteriDegerleri, new { @class = "form-control" })
+
+            <label class="mt-2">Ürün</label>
+            @Html.DropDownListFor(c => c.UrunId, (List<SelectListItem>)ViewBag.urunDegerleri, new { @class = "form-control" })
+
+            <label class="mt-2">Adet</label>
+            @Html.TextBoxFor(c => c.Adet, new { @class = "form-control" })
+
+            <label class="mt-2">Fiyat</label>
+            @Html.TextBoxFor(c => c.Fiyat, new { @class = "form-control" })
+
+        </div>
+
+        <div class="col-md-6">
+
+            <label>Toplam Tutar</label>
+            @Html.TextBoxFor(c => c.ToplamTutar, new { @class = "form-control" })
+
+            <label class="mt-2">Personel Adı ve Soyadı</label>
+            @Html.DropDownListFor(c => c.PersonelId, (List<SelectListItem>)ViewBag.personelDegerleri, new { @class = "form-control" })
+
+            <div class="mt-4">
+                <button type="submit" class="btn btn-primary">Satışı Sistemde Güncelle</button>
+                <a href="/SatisHareket/Index" class="btn btn-danger">Vazgeç</a>
+
+                @Html.HiddenFor(c => c.Id)
+                @Html.HiddenFor(c => c.Tarih)
+            </div>
+
+        </div>
+
+    </div>
+</form>
+
+<div class="mt-3 alert alert-danger @durum">
+    <p class="text-danger">
+        @ViewBag.errorMessages
+    </p>
+</div>
+

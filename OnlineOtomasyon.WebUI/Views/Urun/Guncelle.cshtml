@@ -1,0 +1,55 @@
+﻿@model OnlineOtomasyon.Entities.Concrete.Urun
+@{
+    ViewBag.Title = "Guncelle";
+    string durum = null;
+    if (@ViewBag.errorMessages == null)
+    {
+        durum = "invisible";
+    }
+    else
+    {
+        durum = "";
+    }
+}
+
+<form class="mt-3" action="/Urun/Guncelle" enctype="multipart/form-data" method="post">
+    <div class="row">
+        <div class="col-md-5">
+            <label>Ürün Adı</label>
+            @Html.TextBoxFor(c => c.Ad, new { @class = "form-control" })
+            <br />
+            <label>Marka</label>
+            @Html.TextBoxFor(c => c.Marka, new { @class = "form-control" })
+            <br />
+            <label>Stok</label>
+            @Html.TextBoxFor(c => c.Stok, new { @class = "form-control" })
+            <br />
+            <label>Alış Fiyatı</label>
+            @Html.TextBoxFor(c => c.AlisFiyat, new { @class = "form-control" })
+        </div>
+        <div class="col-md-5">
+            <label>Satış Fiyatı</label>
+            @Html.TextBoxFor(c => c.SatisFiyat, new { @class = "form-control" })
+            <br />
+            <label>Görsel</label>
+            <input type="file" name="dosya" id="dosya" value="file" class="form-control" />
+            <br />
+            <label>Kategorisi</label>
+            @Html.DropDownListFor(c => c.KategoriId, (List<SelectListItem>)ViewBag.kategoriDegerleri, new { @class = "form-control" })
+            <br />
+            <div>
+                <button type="submit" class="btn btn-primary mt-4">Ürünü güncelle</button>
+                <a href="/Urun/Index" class="btn btn-danger mt-4">Ürün sayfasına dön</a>
+                @Html.TextBoxFor(c => c.Id, new { @class = "invisible" })
+                <input type="text" id="gorselYolu" name="gorselYolu" value="@Model.Gorsel" class="invisible" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="alert alert-danger mt-2 @durum">
+    <p class="text-danger">
+        @ViewBag.errorMessages
+    </p>
+</div>
+

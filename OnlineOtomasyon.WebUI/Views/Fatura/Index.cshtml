@@ -1,0 +1,52 @@
+﻿@model List<OnlineOtomasyon.Entities.Concrete.Fatura>
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (Model.Count < 1)
+{
+    <div class="alert alert-danger mt-1">
+        <h3 class="h3 text-danger">
+            Sisteme kayıtlı fatura bulunamadı!
+        </h3>
+        <a href="/Fatura/Ekle" class="btn btn-primary">Fatura Ekle!</a>
+    </div>
+}
+else
+{
+    <table class="table table-striped table-sm table-bordered mt-2">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Müşteri</th>
+                <th>Personel</th>
+                <th>Seri</th>
+                <th>Sıra Numarası</th>
+                <th>Vergi Dairesi</th>
+                <th>Tarih</th>
+                <th>Veritabanı İşlemleri</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id.ToString()</td>
+                    <td>@item.Musteri.Ad&nbsp;@item.Musteri.Soyad</td>
+                    <td>@item.Personel.Ad&nbsp;@item.Personel.Soyad</td>
+                    <td>@item.SeriNo.ToString()</td>
+                    <td>@item.SiraNo.ToString()</td>
+                    <td>@item.VergiDairesi</td>
+                    <td>@item.Tarih.ToString()</td>
+                    <td>
+                        <a class="btn btn-warning btn-sm w-20" href="/Fatura/Guncelle/@item.Id">Güncelle</a>
+                        <a class="btn btn-danger btn-sm w-20" href="/Fatura/Sil/@item.Id">Sil</a>
+                        <a class="btn btn-primary btn-sm w-20" href="/Fatura/Ekle">Ekle</a>
+                        <a class="btn btn-success btn-sm w-20" href="/Fatura/Detay/@item.Id">Detay</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+

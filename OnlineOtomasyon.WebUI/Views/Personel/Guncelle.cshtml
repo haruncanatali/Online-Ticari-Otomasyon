@@ -1,0 +1,42 @@
+﻿@model OnlineOtomasyon.Entities.Concrete.Personel
+@{
+    ViewBag.Title = "Guncelle";
+    string durum = null;
+    if (@ViewBag.errorMessages == null)
+    {
+        durum = "invisible";
+    }
+    else
+    {
+        durum = "";
+    }
+}
+
+<form class="mt-3" method="post" action="/Personel/Guncelle" enctype="multipart/form-data">
+    @Html.LabelFor(c => c.Ad)
+    @Html.TextBoxFor(c => c.Ad, new { @class = "form-control w-75" })
+    @Html.LabelFor(c => c.Soyad, new { @class = "mt-2" })
+    @Html.TextBoxFor(c => c.Soyad, new { @class = "form-control w-75" })
+    <div class="mt-2">
+        <label>Personel Fotoğraf</label>
+        <input type="file" id="dosya" name="dosya" value="@Model.Gorsel" class="form-control" />
+    </div>
+    <div class="mt-2">
+        <label>Departman</label>
+        @Html.DropDownListFor(c => c.DepartmanId, (List<SelectListItem>)ViewBag.DepartmanListesi, new { @class = "form-control" })
+    </div>
+    <div class="mt-2">
+        <button type="submit" class="btn btn-primary">Güncelle</button>
+        @Html.HiddenFor(c=>c.Id)
+        <input type="text" id="yol" name="yol" value="@Model.Gorsel" class="invisible"/>
+    </div>
+
+</form>
+
+
+<div class="alert alert-danger mt-2 @durum">
+    <p class="text-danger">
+        @ViewBag.errorMessages
+    </p>
+</div>
+

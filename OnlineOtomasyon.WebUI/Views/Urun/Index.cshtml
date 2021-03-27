@@ -1,0 +1,70 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model IPagedList<OnlineOtomasyon.Entities.Concrete.Urun>
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (Model.Count < 1)
+{
+    <div class="alert alert-danger mt-3">
+        <h3 class="h3">Sisteme kayıtlı ürün bulunamadı.</h3>
+    </div>
+}
+else
+{
+    <table class="table table-striped table-bordered" id="tbl">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Ürün Adı</th>
+                <th>Markası</th>
+                <th>Stok</th>
+                <th>Alış Fiyatı</th>
+                <th>Satış Fiyatı</th>
+                <th>Kategorisi</th>
+                <th>Görsel</th>
+                <th>Veritabanı İşlemi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id.ToString()</td>
+                    <td>@item.Ad</td>
+                    <td>@item.Marka</td>
+                    <td>@item.Stok.ToString()</td>
+                    <td>@item.AlisFiyat.ToString() &nbsp; &#x20BA;</td>
+                    <td>@item.SatisFiyat.ToString() &nbsp; &#x20BA;</td>
+                    <td>@item.Kategori.KategoriAdi</td>
+                    <td>
+                        <img class="img-responsive" src="/Content/Img/@item.Gorsel" alt="" width="50" height="50" />
+                    </td>
+                    <td>
+                        <a href="/Urun/Guncelle/@item.Id" class="btn btn-warning btn-sm w-27" style="margin-left:5px;">Güncelle</a>
+                        <a href="/Urun/Sil/@item.Id" class="btn btn-danger btn-sm w-25" style="margin-left:5px;">Sil</a>
+                        <a href="/Urun/Ekle" class="btn btn-primary btn-sm w-25" style="margin-left:5px;">Ekle</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-center">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                @Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }), new PagedListRenderOptions
+           {
+               LinkToFirstPageFormat = "İlk",
+               LinkToPreviousPageFormat = "Önceki",
+               LinkToNextPageFormat = "Sonraki",
+               LinkToLastPageFormat = "Son"
+           })
+            </ul>
+        </nav>
+    </div>
+
+}
+
+

@@ -1,0 +1,16 @@
+﻿body {
+}
+
+.solMenu {
+    color: white;
+    background-color: #2d3436;
+}
+
+.solMenuLink{
+    color:white;
+    text-decoration:none;
+}
+.solMenuLink:hover{
+    color : red;
+    transition:0.6s;
+}

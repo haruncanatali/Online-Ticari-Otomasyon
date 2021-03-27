@@ -1,0 +1,37 @@
+﻿@model List<OnlineOtomasyon.Entities.Concrete.Personel>
+@{
+    ViewBag.Title = "Detay";
+    string baslik = ViewBag.DepartmanAdi + " Departmanına Ait Çalışanlar";
+}
+
+@if (Model.Count < 1)
+{
+    <div class="alert alert-danger mt-3">
+        <h3 class="h3">Sistemde henüz bu kategoriye ait personel eklenmemiştir. </h3>
+    </div>
+}
+else
+{
+<div class="row">
+    <div class="alert alert-heading mt-3">
+        <h4 class="text-center text-warning">
+            @baslik
+        </h4>
+    </div>
+    @foreach (var item in Model)
+    {
+        <div class="card mt-2" style="width: 15rem; margin-left:25px;">
+            <div class="d-flex justify-content-center">
+                <img src="~/Content/Img/@item.Gorsel" height="250" class="card-img-top mt-2" alt="...">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title text-center">@item.Ad&nbsp;@item.Soyad</h5>
+                <div class="d-flex justify-content-center h-auto">
+                    <a href="/Satis/PersonelDetay/@item.Id" class="btn btn-primary btn-sm" >Satışları incele</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+}
+

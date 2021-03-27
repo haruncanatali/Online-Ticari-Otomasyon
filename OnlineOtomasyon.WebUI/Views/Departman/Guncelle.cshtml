@@ -1,0 +1,26 @@
+﻿@model OnlineOtomasyon.Entities.Concrete.Departman
+@{
+    ViewBag.Title = "Guncelle";
+    string durum = null;
+    if (@ViewBag.errorMessages == null)
+    {
+        durum = "invisible";
+    }
+    else
+    {
+        durum = "";
+    }
+}
+
+<form action="/Departman/Guncelle" method="post">
+    <label for="departmanAd" class="form-label mt-4">Departman Adı</label>
+    @Html.TextBoxFor(c => c.DepartmanAd, new { @class = "form-control", @id = "departmanAd" })
+    <button type="submit" class="btn btn-primary mt-3">Güncelle</button>
+    @Html.HiddenFor(c => c.Id)
+</form>
+
+<div class="alert alert-danger mt-2 @durum">
+    <p class="text-danger">
+        @ViewBag.errorMessages
+    </p>
+</div>

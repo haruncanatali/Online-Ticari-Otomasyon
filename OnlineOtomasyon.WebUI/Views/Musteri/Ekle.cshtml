@@ -1,0 +1,48 @@
+﻿@model OnlineOtomasyon.Entities.Concrete.Musteri
+@{
+    ViewBag.Title = "Ekle";
+    string durum = null;
+    if (@ViewBag.errorMessages == null)
+    {
+        durum = "invisible";
+    }
+    else
+    {
+        durum = "";
+    }
+}
+
+<form class="mt-3" action="/Musteri/Ekle" method="post">
+    <div class="row">
+        <div class="col-md-5">
+            <label>Müşteri Adı</label>
+            @Html.TextBoxFor(c => c.Ad, new { @class = "form-control" })
+            <br />
+            <label>Müşteri Soyadı</label>
+            @Html.TextBoxFor(c => c.Soyad, new { @class = "form-control" })
+            <br />
+            <label>Mail</label>
+            @Html.TextBoxFor(c => c.Mail, new { @class = "form-control" })
+            <br />
+            <label>Telefon</label>
+            @Html.TextBoxFor(c => c.Telefon, new { @class = "form-control" })
+        </div>
+        <div class="col-md-5">
+            <label>Adresi</label>
+            @Html.TextAreaFor(c => c.Adres,8,5, new { @class = "form-control" })
+            <br />
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary mt-4">Müşteriyi sisteme ekle</button>
+                <a href="/Musteri/Index" style="margin-left:10px;" class="btn btn-danger mt-4">Müsteri sayfasına dön</a>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<div class="alert alert-danger mt-2 @durum">
+    <p class="text-danger">
+        @ViewBag.errorMessages
+    </p>
+</div>
+
